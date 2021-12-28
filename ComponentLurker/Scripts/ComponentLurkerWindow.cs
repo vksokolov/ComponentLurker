@@ -12,6 +12,7 @@ public class ComponentLurkerWindow : EditorWindow
     private SerializedObject _so;
     private Type _type;
     private FieldInfo[] _fields;
+    private bool[] _useField;
     private object[] _values;
     private bool[] _equalityPredicates;
     
@@ -32,6 +33,7 @@ public class ComponentLurkerWindow : EditorWindow
             _type = _script.GetClass();
             _fields = _type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             _values = new object[_fields.Length];
+            _useField = new bool[_fields.Length];
             _equalityPredicates = new bool[_fields.Length];
         }
         
@@ -47,7 +49,7 @@ public class ComponentLurkerWindow : EditorWindow
                     bool ok = true;
                     for(int i=0;i<_fields.Length;i++)
                     {
-                        if (_values[i] == null)
+                        if (_values[i] == null && !_useField[i])
                             continue;
 
                         object value = _fields[i].GetValue(component);
@@ -78,11 +80,20 @@ public class ComponentLurkerWindow : EditorWindow
             if (drawFunctions.ContainsKey(type))
             {
                 EditorGUILayout.BeginHorizontal();
+                if (GUILayout.Button(_useField[i] ? "[✓]" : "[ ]", GUILayout.MaxWidth(30)))
+                {
+                    _useField[i] = !_useField[i];
+                }
+                
+                EditorGUI.BeginDisabledGroup(!_useField[i]);
+                
                 _values[i] = drawFunctions[type](field.Name, _values[i]);
                 if (GUILayout.Button(_equalityPredicates[i] ? "=" : "≠"))
                 {
                     _equalityPredicates[i] = !_equalityPredicates[i];
                 }
+                
+                EditorGUI.EndDisabledGroup();
                 EditorGUILayout.EndHorizontal();
             }
             else
