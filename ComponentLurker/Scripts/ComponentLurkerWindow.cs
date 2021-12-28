@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class ComponentLurkerWindow : EditorWindow
 {
+    private MonoScript _prevScript;
     private MonoScript _script;
 
     private SerializedObject _so;
@@ -26,8 +27,13 @@ public class ComponentLurkerWindow : EditorWindow
     void OnGUI ()
     {
         _script = (MonoScript)EditorGUILayout.ObjectField("Script", _script, typeof(MonoScript), true);
-
-        if (GUILayout.Button("RefreshFields"))
+        if (_prevScript != _script)
+        {
+            _prevScript = _script;
+            RefreshFields();
+        }
+        
+        void RefreshFields()
         {
             _so = new SerializedObject(_script);
             _type = _script.GetClass();
@@ -49,7 +55,7 @@ public class ComponentLurkerWindow : EditorWindow
                     bool ok = true;
                     for(int i=0;i<_fields.Length;i++)
                     {
-                        if (_values[i] == null && !_useField[i])
+                        if (_values[i] == null || !_useField[i])
                             continue;
 
                         object value = _fields[i].GetValue(component);
