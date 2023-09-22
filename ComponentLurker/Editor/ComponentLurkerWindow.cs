@@ -166,6 +166,9 @@ namespace ComponentLurker
 
         private void DrawSelectionBox()
         {
+            if (_eligibleFields.Count == 0)
+                return;
+            
             EditorGUILayout.BeginHorizontal();
             if (!_isSelectionInProcess && GUILayout.Button("+", GUILayout.Width(20))) 
                 _isSelectionInProcess = true;
