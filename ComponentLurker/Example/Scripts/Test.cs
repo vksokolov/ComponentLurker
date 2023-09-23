@@ -7,5 +7,6 @@ namespace ComponentLurker.Example
         public int IntVal;
         public float FloatVal;
         public Sprite SpriteVal;
+        public GameObject GameObjectVal;
     }
 }
