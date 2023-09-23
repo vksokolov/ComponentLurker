@@ -31,9 +31,9 @@ namespace ComponentLurker.Drawers
         }
 
         protected override bool IsEqual(object value) => 
-            Equals(value, Value);
+            (UnityEngine.Object)value == (UnityEngine.Object)Value;
 
         protected override bool IsNotEqual(object value) => 
-            !Equals(value, Value);
+            !(UnityEngine.Object)value == (UnityEngine.Object)Value;
     }
 }
