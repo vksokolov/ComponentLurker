@@ -47,6 +47,8 @@ MonoBehaviour:
   IntVal: 1
   FloatVal: 0
   SpriteVal: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  GameObjectVal: {fileID: 0}
+  StringVal: 
 --- !u!1 &2806542546111875574
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +96,8 @@ MonoBehaviour:
   IntVal: 1
   FloatVal: 0
   SpriteVal: {fileID: 0}
+  GameObjectVal: {fileID: 0}
+  StringVal: asdasd
 --- !u!1 &3588279549073752891
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,6 +145,8 @@ MonoBehaviour:
   IntVal: 1
   FloatVal: 0
   SpriteVal: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  GameObjectVal: {fileID: 0}
+  StringVal: 
 --- !u!1 &5413057856714830682
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,3 +229,5 @@ MonoBehaviour:
   IntVal: 0
   FloatVal: 0
   SpriteVal: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  GameObjectVal: {fileID: 0}
+  StringVal: 123123

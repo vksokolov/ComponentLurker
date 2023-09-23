@@ -84,6 +84,9 @@ namespace ComponentLurker
         private static Transform ResolvePathWithIndices(Transform root, string pathWithIndices)
         {
             string[] parts = pathWithIndices.Split('/');
+            if (parts.Length <= 1) 
+                return root;
+            
             Transform current = root;
 
             foreach (var part in parts)

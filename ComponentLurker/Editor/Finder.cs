@@ -20,10 +20,10 @@ namespace ComponentLurker
                 if (type.IsAbstract || !type.IsSubclassOf(baseType) || type.IsGenericType) 
                     continue;
 
-                if (type.BaseType == null || type.BaseType.BaseType != baseType)
+                if (type.BaseType == null)
                 {
-                    Debug.LogWarning($"Drawer {type} is not inherited from {baseType} directly");
-                    continue;
+                    Debug.LogWarning($"Type {type.FullName} is not a generic type, but it's base type is null. " +
+                                     $"This is probably a bug in ComponentLurker. Please report it on GitHub.");
                 }
                 
                 result.Add((type, type.BaseType.GetGenericArguments()[0]));

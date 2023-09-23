@@ -56,6 +56,7 @@ namespace ComponentLurker.Drawers
             Less = 1 << 3,
             GreaterOrEqual = 1 << 4,
             LessOrEqual = 1 << 5,
+            Contains = 1 << 6,
         }
 
         public static Dictionary<ComparisonOperations, string> ComparisonOperationsNames = new()
@@ -66,6 +67,7 @@ namespace ComponentLurker.Drawers
             {ComparisonOperations.Less, "<"}, 
             {ComparisonOperations.GreaterOrEqual, ">="}, 
             {ComparisonOperations.LessOrEqual, "<="},
+            {ComparisonOperations.Contains, "Has"},
         };
 
         public object Value;
@@ -93,6 +95,7 @@ namespace ComponentLurker.Drawers
                 ComparisonOperations.Less => IsLess(value),
                 ComparisonOperations.GreaterOrEqual => IsGreaterOrEqual(value),
                 ComparisonOperations.LessOrEqual => IsLessOrEqual(value),
+                ComparisonOperations.Contains => Contains(value),
                 _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
             };
         }
@@ -105,7 +108,9 @@ namespace ComponentLurker.Drawers
             return value.Equals(Value);
         }
 
-        protected virtual bool IsNotEqual(object value) => !Value.Equals(value);
+        protected virtual bool IsNotEqual(object value) => 
+            !Value.Equals(value);
+        
         protected virtual bool IsGreater(object value)
         {
             if (Value == null) return false;
@@ -114,23 +119,21 @@ namespace ComponentLurker.Drawers
             return Convert.ToSingle(value) > Convert.ToSingle(Value);
         }
 
-        protected virtual bool IsGreaterOrEqual(object value)
-        {
-            if (Value == null) return value == null;
-            if (value == null) return true;
-            
-            return (float)value >= (float)Value;
-        }
-
         protected virtual bool IsLess(object value)
         {
             if (Value == null) return false;
             if (value == null) return true;
             
-            return (float)value < (float)Value;
+            return Convert.ToSingle(value) < Convert.ToSingle(Value);
         }
 
-        protected virtual bool IsLessOrEqual(object value)
+        private bool IsGreaterOrEqual(object value) => 
+            Equals(value) || IsGreater(value);
+
+        private bool IsLessOrEqual(object value) => 
+            Equals(value) || IsLess(value);
+
+        protected virtual bool Contains(object value)
         {
             if (Value == null)
             {
@@ -138,7 +141,7 @@ namespace ComponentLurker.Drawers
             }
             if (value == null) return true;
             
-            return (float)value <= (float)Value;
+            return ((string)value).Contains((string)Value);
         }
     }
     
