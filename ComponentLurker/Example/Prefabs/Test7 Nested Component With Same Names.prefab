@@ -93,7 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IntVal: 1
   FloatVal: 0
-  SpriteVal: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  SpriteVal: {fileID: 0}
 --- !u!1 &3588279549073752891
 GameObject:
   m_ObjectHideFlags: 0
