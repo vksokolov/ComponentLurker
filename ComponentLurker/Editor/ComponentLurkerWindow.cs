@@ -120,6 +120,9 @@ namespace ComponentLurker
 
         private void DrawSelectedFields()
         {
+            // Remove filter if type is not chosen anymore
+            _selectedFields.RemoveAll(field => !ChosenDrawableTypes.Contains( field.Field.FieldType));
+            
             foreach (var fieldData in _selectedFields)
             {
                 EditorGUILayout.BeginHorizontal();
@@ -135,7 +138,8 @@ namespace ComponentLurker
             foreach (var fieldData in _elementsToRemove)
             {
                 _selectedFields.Remove(fieldData);
-                _eligibleFields.Add(fieldData.Field);
+                if (ChosenDrawableTypes.Contains(fieldData.Field.FieldType))
+                    _eligibleFields.Add(fieldData.Field);
             }
 
             _elementsToRemove.Clear();
