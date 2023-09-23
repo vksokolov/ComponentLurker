@@ -33,7 +33,7 @@ namespace ComponentLurker
         private int _selectedFieldIndex;
         private string[] _fieldsNames;
 
-        private List<(GameObject prefab, Component compnent)> _foundPrefabs;
+        private List<(GameObject prefab, Component component)> _foundPrefabs;
 
         [MenuItem("Utils/ComponentLurker")]
         public static void ShowWindow()
