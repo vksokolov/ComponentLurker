@@ -18,7 +18,7 @@
 
 # Example
 
-To find all prefabs with `Test` components that don't have a sprite set:
+To find all prefabs with `Test` components with a sprite field `SpriteVal` is empty:
 
 1. Drag the `Test` component to ComponentLurker.
 2. Choose the Sprite field type.
